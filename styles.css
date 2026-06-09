@@ -593,6 +593,12 @@ h3,
   color: var(--white);
 }
 
+.ticket-price sup {
+  font-size: 0.75rem;
+  vertical-align: top;
+  margin-left: 2px;
+}
+
 .ticket-features {
   padding-left: 0;
   list-style: none;
@@ -602,6 +608,21 @@ h3,
 .ticket-card .button {
   align-self: end;
   margin-top: 6px;
+}
+
+.ticket-note {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.ticket-payment-image {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 12px;
 }
 
 .ticket-features li {
