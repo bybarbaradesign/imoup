@@ -536,7 +536,8 @@ h3,
 
 .speaker-photo {
   width: 100%;
-  aspect-ratio: 210 / 297;
+  aspect-ratio: 944 / 1678;
+  min-height: 540px;
   border-radius: 22px;
   border: 1px solid var(--line);
   overflow: hidden;
@@ -591,7 +592,6 @@ h3,
 }
 
 .speaker-card:hover .speaker-photo {
-  transform: scale(1.02);
   border-color: rgba(255, 255, 255, 0.24);
   background: rgba(255, 255, 255, 0.06);
 }
@@ -1076,6 +1076,10 @@ h3,
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .speaker-photo {
+    min-height: 500px;
+  }
+
   .location-grid {
     grid-template-columns: 1fr;
   }
@@ -1114,6 +1118,10 @@ h3,
   .hotel-grid,
   .location-grid {
     grid-template-columns: 1fr;
+  }
+
+  .speaker-photo {
+    min-height: 0;
   }
 
   .hero {
