@@ -549,7 +549,9 @@ h3,
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  background: rgba(4, 14, 20, 0.92);
 }
 
 .speaker-card-mystery {
