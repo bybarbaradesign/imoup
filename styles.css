@@ -877,6 +877,20 @@ h3,
   filter: brightness(1.08);
 }
 
+.map-pin-event {
+  left: 49%;
+  top: 52%;
+}
+
+.map-pin-event::before {
+  background: var(--white);
+}
+
+.map-pin-event span {
+  color: var(--bg);
+  background: rgba(255, 255, 255, 0.92);
+}
+
 .map-pin-melia {
   left: 38%;
   top: 47%;
