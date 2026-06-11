@@ -9,6 +9,7 @@ const ticketTypeInput = document.querySelector("#ticket-type-input");
 const selectedTicketName = document.querySelector("#selected-ticket-name");
 const modalClose = document.querySelector(".modal-close");
 const modalCancel = document.querySelector(".modal-cancel");
+const venueMapElement = document.querySelector("#venue-map");
 let targetTicketUrl = "https://imoup.pt/#bilhetes";
 
 if (menuToggle && siteNav) {
@@ -117,5 +118,68 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
     window.open(targetTicketUrl, "_blank", "noopener,noreferrer");
     closeTicketModal();
     ticketForm.reset();
+  });
+}
+
+if (venueMapElement && typeof L !== "undefined") {
+  const venueMap = L.map(venueMapElement, {
+    scrollWheelZoom: true,
+  });
+
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(venueMap);
+
+  const locations = [
+    {
+      name: "Centro de Congressos de Aveiro",
+      coordinates: [40.638056, -8.643611],
+      url: "https://www.google.com/maps/search/?api=1&query=40.638056,-8.643611",
+      markerClass: "map-marker map-marker--event",
+      icon: "•",
+    },
+    {
+      name: "Meliá Ria",
+      coordinates: [40.6386, -8.6452],
+      url: "https://www.google.com/maps/search/?api=1&query=40.6386,-8.6452",
+      markerClass: "map-marker map-marker--melia",
+      icon: "H",
+    },
+    {
+      name: "Hotel Afonso V",
+      coordinates: [40.6371592, -8.6470497],
+      url: "https://www.google.com/maps/search/?api=1&query=40.6371592,-8.6470497",
+      markerClass: "map-marker map-marker--afonso",
+      icon: "H",
+    },
+  ];
+
+  const bounds = [];
+
+  locations.forEach((location) => {
+    const marker = L.marker(location.coordinates, {
+      icon: L.divIcon({
+        className: "",
+        html: `<div class="${location.markerClass}"><span class="map-marker__icon">${location.icon}</span></div>`,
+        iconSize: [26, 26],
+        iconAnchor: [13, 26],
+        popupAnchor: [0, -24],
+      }),
+    }).addTo(venueMap);
+
+    marker.bindPopup(
+      `<strong>${location.name}</strong><a href="${location.url}" target="_blank" rel="noreferrer">Abrir no Google Maps</a>`
+    );
+
+    marker.on("click", () => {
+      window.open(location.url, "_blank", "noopener,noreferrer");
+    });
+
+    bounds.push(location.coordinates);
+  });
+
+  venueMap.fitBounds(bounds, {
+    padding: [40, 40],
   });
 }
