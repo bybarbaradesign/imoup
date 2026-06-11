@@ -1,7 +1,7 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const siteNav = document.querySelector(".site-nav");
 const faqItems = document.querySelectorAll(".faq-item");
-const navLinks = document.querySelectorAll(".site-nav a[href^=\"#\"]");
+const navLinks = document.querySelectorAll(".site-nav a[href^="#"]");
 const ticketButtons = document.querySelectorAll(".ticket-open");
 const ticketModal = document.querySelector("#ticket-modal");
 const ticketForm = document.querySelector("#ticket-form");
@@ -137,33 +137,31 @@ if (venueMapElement && typeof L !== "undefined") {
       coordinates: [40.638056, -8.643611],
       url: "https://www.google.com/maps/search/?api=1&query=40.638056,-8.643611",
       markerClass: "map-marker map-marker--event",
-      icon: "•",
     },
     {
       name: "Meliá Ria",
       coordinates: [40.6386, -8.6452],
       url: "https://www.google.com/maps/search/?api=1&query=40.6386,-8.6452",
       markerClass: "map-marker map-marker--melia",
-      icon: "H",
     },
     {
       name: "Hotel Afonso V",
       coordinates: [40.6371592, -8.6470497],
       url: "https://www.google.com/maps/search/?api=1&query=40.6371592,-8.6470497",
       markerClass: "map-marker map-marker--afonso",
-      icon: "H",
     },
   ];
 
   const bounds = [];
 
   locations.forEach((location) => {
+    const isEventMarker = location.markerClass.includes("map-marker--event");
     const marker = L.marker(location.coordinates, {
       icon: L.divIcon({
         className: "",
-        html: `<div class="${location.markerClass}"><span class="map-marker__icon">${location.icon}</span></div>`,
-        iconSize: [26, 26],
-        iconAnchor: [13, 26],
+        html: `<div class="${location.markerClass}"></div>`,
+        iconSize: isEventMarker ? [34, 34] : [26, 26],
+        iconAnchor: isEventMarker ? [17, 34] : [13, 26],
         popupAnchor: [0, -24],
       }),
     }).addTo(venueMap);

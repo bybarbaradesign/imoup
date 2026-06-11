@@ -858,11 +858,14 @@ h3,
 }
 
 .map-marker--event {
-  background: var(--white);
+  width: 34px;
+  height: 34px;
+  background: var(--green);
 }
 
 .map-marker--event::after {
-  background: var(--bg);
+  inset: 9px;
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .map-marker--melia {
@@ -871,23 +874,6 @@ h3,
 
 .map-marker--afonso {
   background: var(--green);
-}
-
-.map-marker__icon {
-  position: absolute;
-  inset: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(45deg);
-  z-index: 1;
-  color: var(--white);
-  font-size: 0.72rem;
-  font-weight: 800;
-}
-
-.map-marker--event .map-marker__icon {
-  color: var(--bg);
 }
 
 .leaflet-popup-content-wrapper,
