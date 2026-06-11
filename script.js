@@ -1,7 +1,7 @@
 const menuToggle = document.querySelector(".menu-toggle");
 const siteNav = document.querySelector(".site-nav");
 const faqItems = document.querySelectorAll(".faq-item");
-const navLinks = document.querySelectorAll(".site-nav a[href^="#"]");
+const navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
 const ticketButtons = document.querySelectorAll(".ticket-open");
 const ticketModal = document.querySelector("#ticket-modal");
 const ticketForm = document.querySelector("#ticket-form");
