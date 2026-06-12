@@ -904,6 +904,18 @@ h3,
   justify-content: center;
 }
 
+.map-link-event {
+  color: var(--green);
+}
+
+.map-link-melia {
+  color: var(--red);
+}
+
+.map-link-afonso {
+  color: #4da3ff;
+}
+
 .faq-list {
   display: grid;
   gap: 16px;
