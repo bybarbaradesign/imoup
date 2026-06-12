@@ -835,17 +835,18 @@ h3,
 }
 
 .venue-card {
-  width: 100%;
-  text-align: center;
+  width: min(100%, 860px);
+  margin: 0 auto;
+  text-align: left;
 }
 
-.venue-card .ticket-features,
 .venue-card .button {
-  justify-self: center;
+  justify-self: start;
 }
 
 .hotel-card {
   align-content: start;
+  grid-template-rows: auto auto auto 1fr auto;
 }
 
 .hotel-card p,
