@@ -63,7 +63,7 @@ a {
 
 .brand {
   display: block;
-  width: 220px;
+  width: 188px;
 }
 
 .brand img {
@@ -171,9 +171,9 @@ a {
   grid-template-columns: 1.15fr 0.85fr;
   gap: 38px;
   align-items: center;
-  min-height: 58vh;
+  min-height: 52vh;
   position: relative;
-  padding: 28px 30px;
+  padding: 22px 26px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 40px;
   overflow: hidden;
@@ -305,7 +305,7 @@ h3,
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  margin: 26px 0 18px;
+  margin: 20px 0 14px;
 }
 
 .hero-points {
@@ -313,7 +313,7 @@ h3,
   flex-wrap: wrap;
   gap: 12px;
   padding: 0;
-  margin: 18px 0 0;
+  margin: 14px 0 0;
   list-style: none;
 }
 
@@ -327,7 +327,7 @@ h3,
 
 .hero-visual {
   position: relative;
-  min-height: 360px;
+  min-height: 320px;
   display: grid;
   place-items: center;
 }
@@ -357,8 +357,8 @@ h3,
 
 .hero-card {
   position: relative;
-  width: min(100%, 320px);
-  padding: 24px;
+  width: min(100%, 290px);
+  padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 32px;
   background:
@@ -375,7 +375,7 @@ h3,
 }
 
 .hero-year {
-  font-size: clamp(4rem, 8vw, 5.8rem);
+  font-size: clamp(3.5rem, 7vw, 5rem);
   line-height: 0.85;
   color: rgba(255, 255, 255, 0.14);
 }
@@ -383,7 +383,7 @@ h3,
 .hero-event {
   display: grid;
   gap: 4px;
-  margin: 18px 0 22px;
+  margin: 14px 0 18px;
 }
 
 .hero-event span {
@@ -394,7 +394,7 @@ h3,
 }
 
 .hero-event strong {
-  font-size: clamp(1.55rem, 2.3vw, 2.2rem);
+  font-size: clamp(1.35rem, 2vw, 1.95rem);
 }
 
 .hero-details {
@@ -1272,7 +1272,7 @@ h3,
   }
 
   .brand {
-    width: 150px;
+    width: 132px;
   }
 
   .site-header {
@@ -1281,7 +1281,7 @@ h3,
   }
 
   .hero {
-    padding: 20px 16px 24px;
+    padding: 18px 14px 20px;
     border-radius: 28px;
   }
 
@@ -1291,7 +1291,7 @@ h3,
 
   .hero-visual {
     order: 2;
-    min-height: 280px;
+    min-height: 240px;
   }
 
   h1 {
