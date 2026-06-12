@@ -964,8 +964,17 @@ h3,
 }
 
 .faq-item.active .faq-answer {
-  max-height: 180px;
+  max-height: 1200px;
   margin-top: 16px;
+}
+
+.faq-item-contact .faq-question::after {
+  content: "→";
+  color: var(--red);
+}
+
+.faq-item-contact.active .faq-question::after {
+  content: "–";
 }
 
 .site-footer {
