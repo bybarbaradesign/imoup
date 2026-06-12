@@ -169,11 +169,11 @@ a {
 .hero {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: 38px;
+  gap: 28px;
   align-items: center;
-  min-height: 52vh;
+  min-height: 48vh;
   position: relative;
-  padding: 22px 26px;
+  padding: 18px 22px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 40px;
   overflow: hidden;
@@ -219,10 +219,10 @@ p {
 
 h1 {
   font-family: "Rounded Elegance", "Trebuchet MS", sans-serif;
-  font-size: clamp(2.2rem, 4.1vw, 3.8rem);
+  font-size: clamp(2rem, 3.6vw, 3.3rem);
   line-height: 1;
-  max-width: 13ch;
-  margin-bottom: 16px;
+  max-width: 12.5ch;
+  margin-bottom: 14px;
   font-weight: 400;
   text-transform: uppercase;
   display: grid;
@@ -325,9 +325,33 @@ h3,
   background: rgba(255, 255, 255, 0.04);
 }
 
+.hero-points li {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.hero-point-link {
+  display: block;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--white);
+  text-decoration: none;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.hero-point-link:hover {
+  background: linear-gradient(90deg, rgba(255, 98, 93, 0.95), rgba(18, 224, 110, 0.95));
+  border-color: transparent;
+  box-shadow: 0 12px 30px rgba(18, 224, 110, 0.18);
+  transform: translateY(-1px);
+}
+
 .hero-visual {
   position: relative;
-  min-height: 320px;
+  min-height: 280px;
   display: grid;
   place-items: center;
 }
@@ -357,8 +381,8 @@ h3,
 
 .hero-card {
   position: relative;
-  width: min(100%, 290px);
-  padding: 20px;
+  width: min(100%, 260px);
+  padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 32px;
   background:
@@ -375,7 +399,7 @@ h3,
 }
 
 .hero-year {
-  font-size: clamp(3.5rem, 7vw, 5rem);
+  font-size: clamp(3.1rem, 6.2vw, 4.4rem);
   line-height: 0.85;
   color: rgba(255, 255, 255, 0.14);
 }
@@ -383,7 +407,7 @@ h3,
 .hero-event {
   display: grid;
   gap: 4px;
-  margin: 14px 0 18px;
+  margin: 12px 0 16px;
 }
 
 .hero-event span {
@@ -394,7 +418,7 @@ h3,
 }
 
 .hero-event strong {
-  font-size: clamp(1.35rem, 2vw, 1.95rem);
+  font-size: clamp(1.2rem, 1.8vw, 1.7rem);
 }
 
 .hero-details {
@@ -1233,7 +1257,7 @@ h3,
   }
 
   .hero-card {
-    width: min(100%, 360px);
+    width: min(100%, 320px);
   }
 
   .ticket-card,
@@ -1295,7 +1319,7 @@ h3,
   }
 
   h1 {
-    font-size: clamp(2.05rem, 9vw, 2.7rem);
+    font-size: clamp(1.85rem, 8.2vw, 2.45rem);
     line-height: 1.02;
     gap: 6px;
   }
@@ -1326,6 +1350,7 @@ h3,
   }
 
   .hero-points li,
+  .hero-point-link,
   .ticket-badge {
     width: 100%;
     text-align: center;
