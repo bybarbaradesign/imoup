@@ -710,6 +710,11 @@ h3,
   padding-right: 18px;
 }
 
+.ticket-features-spacious li strong {
+  color: var(--white);
+  font-weight: 800;
+}
+
 .ticket-card-normal {
   border-color: rgba(18, 224, 110, 0.32);
 }
@@ -808,18 +813,33 @@ h3,
 }
 
 .location-grid {
-  grid-template-columns: 0.95fr 1.05fr;
+  grid-template-columns: 1fr;
   align-items: start;
 }
 
 .hotel-grid {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .location-card {
   display: grid;
   gap: 10px;
   padding: 28px 30px;
+}
+
+.venue-card {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.venue-card .ticket-features,
+.venue-card .button {
+  justify-self: center;
+}
+
+.hotel-card {
+  align-content: start;
 }
 
 .location-card p,
