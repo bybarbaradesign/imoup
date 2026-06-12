@@ -1183,6 +1183,12 @@ h3,
   line-height: 1.08;
 }
 
+.ticket-modal-heading {
+  margin: 0 0 10px;
+  text-align: left;
+  font-size: clamp(1.45rem, 2.2vw, 2rem);
+}
+
 .ticket-modal h2 span {
   display: block;
 }
@@ -1208,7 +1214,7 @@ h3,
 
 .modal-ticket-name {
   margin: 10px 0 22px;
-  color: var(--green-soft);
+  color: rgba(255, 255, 255, 0.92);
   font-weight: 700;
 }
 
@@ -1246,6 +1252,20 @@ h3,
   font: inherit;
 }
 
+.ticket-form select {
+  appearance: none;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.06);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ticket-form select option {
+  color: #061a24;
+  background: #ffffff;
+}
+
 .consent-row {
   grid-template-columns: auto 1fr;
   align-items: start;
@@ -1258,6 +1278,7 @@ h3,
 .consent-row span {
   text-align: left;
   line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .consent-row a {
@@ -1265,9 +1286,11 @@ h3,
   font-weight: 700;
 }
 
-.consent-row small {
-  display: inline;
+.consent-note {
+  margin: -6px 0 0 34px;
   color: rgba(255, 255, 255, 0.74);
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 
 .modal-actions {
@@ -1488,6 +1511,10 @@ h3,
 
   .phone-row {
     grid-template-columns: 1fr;
+  }
+
+  .consent-note {
+    margin-left: 0;
   }
 
   .header-cta,
