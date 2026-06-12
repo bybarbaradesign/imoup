@@ -1129,7 +1129,8 @@ h3,
   align-items: center;
 }
 
-.footer-legal-links a:first-child {
+.footer-legal-links a:first-child,
+.footer-legal-links a:last-child {
   color: var(--green);
 }
 
