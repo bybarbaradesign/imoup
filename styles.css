@@ -836,13 +836,14 @@ h3,
 .venue-card {
   width: 100%;
   grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.88fr);
-  align-items: center;
+  align-items: stretch;
   gap: 24px;
 }
 
 .venue-card-content {
   display: grid;
   gap: 10px;
+  align-content: start;
 }
 
 .venue-card-content .button {
@@ -851,12 +852,14 @@ h3,
 
 .venue-card-media {
   min-width: 0;
+  min-height: 100%;
+  display: flex;
 }
 
 .venue-card-media img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   border-radius: 24px;
   border: 1px solid var(--line);
   object-fit: cover;
