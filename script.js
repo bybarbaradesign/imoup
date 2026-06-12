@@ -10,6 +10,7 @@ const selectedTicketName = document.querySelector("#selected-ticket-name");
 const modalClose = document.querySelector(".modal-close");
 const modalCancel = document.querySelector(".modal-cancel");
 const venueMapElement = document.querySelector("#venue-map");
+const phoneInput = document.querySelector("#phone-input");
 let targetTicketUrl = "https://imoup.pt/#bilhetes";
 
 if (menuToggle && siteNav) {
@@ -78,6 +79,23 @@ const closeTicketModal = () => {
   ticketModal.setAttribute("aria-hidden", "true");
 };
 
+const validatePhone = () => {
+  if (!phoneInput) return true;
+  const digits = phoneInput.value.replace(/\D/g, "");
+  const isValid = digits.length >= 9 && digits.length <= 12;
+  phoneInput.setCustomValidity(isValid ? "" : "Erro: introduz um número válido.");
+  return isValid;
+};
+
+const validateEmailField = () => {
+  const emailInput = ticketForm?.querySelector('input[name="email"]');
+  if (!emailInput) return true;
+  const value = emailInput.value.trim();
+  const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+  emailInput.setCustomValidity(isValid ? "" : "Erro: introduz um email válido.");
+  return isValid;
+};
+
 if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && selectedTicketName) {
   ticketButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
@@ -100,6 +118,8 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
 
   ticketForm.addEventListener("submit", (event) => {
     event.preventDefault();
+    validatePhone();
+    validateEmailField();
     if (!ticketForm.reportValidity()) return;
 
     const formData = new FormData(ticketForm);
@@ -108,6 +128,7 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
       JSON.stringify({
         name: formData.get("name"),
         email: formData.get("email"),
+        phoneCountry: formData.get("phoneCountry"),
         phone: formData.get("phone"),
         consent: formData.get("consent") === "on",
         ticketType: formData.get("ticketType"),
@@ -119,6 +140,18 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
     closeTicketModal();
     ticketForm.reset();
   });
+
+  if (phoneInput) {
+    phoneInput.addEventListener("input", () => {
+      phoneInput.value = phoneInput.value.replace(/[^\d\s()+-]/g, "");
+      validatePhone();
+    });
+  }
+
+  const emailInput = ticketForm.querySelector('input[name="email"]');
+  if (emailInput) {
+    emailInput.addEventListener("input", validateEmailField);
+  }
 }
 
 if (venueMapElement && typeof L !== "undefined") {

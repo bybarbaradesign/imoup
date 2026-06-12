@@ -1155,7 +1155,7 @@ h3,
   padding: 24px;
   background: rgba(2, 10, 16, 0.72);
   backdrop-filter: blur(12px);
-  z-index: 50;
+  z-index: 3000;
 }
 
 .modal-overlay.open {
@@ -1226,8 +1226,16 @@ h3,
   font-weight: 600;
 }
 
+.phone-row {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 10px;
+}
+
 .ticket-form input[type="text"],
-.ticket-form input[type="email"] {
+.ticket-form input[type="email"],
+.ticket-form input[type="tel"],
+.ticket-form select {
   width: 100%;
   min-height: 50px;
   padding: 0 14px;
@@ -1245,6 +1253,21 @@ h3,
 
 .consent-row input {
   margin-top: 4px;
+}
+
+.consent-row span {
+  text-align: left;
+  line-height: 1.6;
+}
+
+.consent-row a {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.consent-row small {
+  display: inline;
+  color: rgba(255, 255, 255, 0.74);
 }
 
 .modal-actions {
@@ -1461,6 +1484,10 @@ h3,
   .footer-contact-list,
   .modal-actions {
     flex-direction: column;
+  }
+
+  .phone-row {
+    grid-template-columns: 1fr;
   }
 
   .header-cta,

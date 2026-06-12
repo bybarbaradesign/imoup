@@ -507,11 +507,23 @@
         </label>
         <label>
           <span>Contacto / WhatsApp</span>
-          <input type="text" name="phone" required>
+          <div class="phone-row">
+            <select name="phoneCountry" id="phone-country" aria-label="Indicativo telefónico" required>
+              <option value="+351" selected>🇵🇹 +351</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+55">🇧🇷 +55</option>
+              <option value="+1">🇺🇸 +1</option>
+            </select>
+            <input type="tel" name="phone" id="phone-input" inputmode="numeric" autocomplete="tel-national" required>
+          </div>
         </label>
         <label class="consent-row">
           <input type="checkbox" name="consent" required>
-          <span>Autorizo o tratamento dos meus dados para contacto e inscrição no evento.</span>
+          <span>Dou o meu consentimento para receber comunicações e confirmo que li e aceito os <a href="https://imoup.pt/termos-e-condicoes/" target="_blank" rel="noreferrer">Termos e Condições</a> e a <a href="https://imoup.pt/politica-de-privacidade/" target="_blank" rel="noreferrer">Política de Privacidade</a>. <small>(Pode cancelar a subscrição a qualquer momento.)</small></span>
         </label>
         <input type="hidden" name="ticketType" id="ticket-type-input">
         <div class="modal-actions">
