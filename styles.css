@@ -673,6 +673,11 @@ h3,
   color: rgba(255, 255, 255, 0.78);
 }
 
+.ticket-note strong {
+  color: var(--white);
+  font-weight: 800;
+}
+
 .ticket-payment-image {
   width: 100%;
   max-width: 160px;
@@ -1085,6 +1090,14 @@ h3,
   display: grid;
   gap: 8px;
   justify-items: center;
+}
+
+.footer-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
 }
 
 .modal-overlay {
