@@ -723,7 +723,7 @@ h3,
 .footer-grid a,
 .footer-contact-list a,
 .map-links a {
-  color: var(--green-soft);
+  color: inherit;
 }
 
 .agenda-poster {
