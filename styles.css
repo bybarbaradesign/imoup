@@ -751,8 +751,7 @@ h3,
 
 .tickets-support a,
 .footer-grid a,
-.footer-contact-list a,
-.map-links a {
+.footer-contact-list a {
   color: inherit;
 }
 
@@ -835,13 +834,32 @@ h3,
 }
 
 .venue-card {
-  width: min(100%, 860px);
-  margin: 0 auto;
-  text-align: left;
+  width: 100%;
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.88fr);
+  align-items: center;
+  gap: 24px;
 }
 
-.venue-card .button {
+.venue-card-content {
+  display: grid;
+  gap: 10px;
+}
+
+.venue-card-content .button {
   justify-self: start;
+}
+
+.venue-card-media {
+  min-width: 0;
+}
+
+.venue-card-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  object-fit: cover;
 }
 
 .hotel-card {
@@ -968,15 +986,15 @@ h3,
 }
 
 .map-link-event {
-  color: var(--green);
+  color: var(--green) !important;
 }
 
 .map-link-melia {
-  color: var(--red);
+  color: var(--red) !important;
 }
 
 .map-link-afonso {
-  color: #4da3ff;
+  color: #4da3ff !important;
 }
 
 .faq-list {
@@ -1106,6 +1124,10 @@ h3,
   justify-content: center;
   gap: 10px;
   align-items: center;
+}
+
+.footer-legal-links a:first-child {
+  color: var(--green);
 }
 
 .modal-overlay {
@@ -1283,6 +1305,10 @@ h3,
   .hero-copy,
   .hero-lead {
     max-width: none;
+  }
+
+  .venue-card {
+    grid-template-columns: 1fr;
   }
 
   .hero-visual {
