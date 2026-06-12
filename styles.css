@@ -370,6 +370,10 @@ h3,
   justify-self: center;
 }
 
+.site-nav.open {
+  z-index: 1001;
+}
+
 .hero-year {
   font-size: clamp(4rem, 8vw, 5.8rem);
   line-height: 0.85;
@@ -1191,9 +1195,14 @@ h3,
   .site-nav.open {
     display: grid;
     grid-column: 1 / -1;
-    justify-items: start;
-    gap: 14px;
+    justify-items: stretch;
+    gap: 10px;
     padding-top: 12px;
+  }
+
+  .site-nav.open a {
+    width: 100%;
+    text-align: center;
   }
 
   .hero,
@@ -1217,6 +1226,32 @@ h3,
   .hero-copy,
   .hero-lead {
     max-width: none;
+  }
+
+  .hero-visual {
+    min-height: 300px;
+  }
+
+  .hero-card {
+    width: min(100%, 360px);
+  }
+
+  .ticket-card,
+  .speaker-card,
+  .agenda-day,
+  .location-card,
+  .faq-item,
+  .about-panel {
+    padding: 22px;
+  }
+
+  .map-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .map-links a {
+    text-align: center;
   }
 }
 
@@ -1246,7 +1281,8 @@ h3,
   }
 
   .hero {
-    padding: 22px 18px;
+    padding: 20px 16px 24px;
+    border-radius: 28px;
   }
 
   .hero-copy {
@@ -1256,6 +1292,67 @@ h3,
   .hero-visual {
     order: 2;
     min-height: 280px;
+  }
+
+  h1 {
+    font-size: clamp(2.05rem, 9vw, 2.7rem);
+    line-height: 1.02;
+    gap: 6px;
+  }
+
+  h2 {
+    font-size: clamp(1.7rem, 7vw, 2.3rem);
+  }
+
+  .hero-lead,
+  .about-copy p,
+  .about-panel p,
+  .agenda-location,
+  .agenda-note,
+  .speaker-card p,
+  .speaker-card span,
+  .ticket-card p,
+  .faq-answer p,
+  .footer-grid p,
+  .tickets-support p,
+  .footer-copy {
+    font-size: 0.96rem;
+    line-height: 1.58;
+  }
+
+  .motto {
+    gap: 10px;
+    font-size: 0.92rem;
+  }
+
+  .hero-points li,
+  .ticket-badge {
+    width: 100%;
+    text-align: center;
+  }
+
+  .stats-band article,
+  .site-footer,
+  .section-highlight,
+  .hero-card {
+    padding: 20px;
+  }
+
+  .ticket-note {
+    font-size: 0.75rem;
+  }
+
+  .speaker-blur span {
+    font-size: 0.9rem;
+  }
+
+  .venue-map {
+    min-height: 320px;
+  }
+
+  .faq-question {
+    font-size: 1rem;
+    gap: 12px;
   }
 
   .hero-actions,
