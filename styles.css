@@ -47,7 +47,7 @@ a {
 .site-header {
   position: sticky;
   top: 16px;
-  z-index: 20;
+  z-index: 1000;
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 24px;
@@ -823,9 +823,12 @@ h3,
 
 .map-frame {
   position: relative;
+  z-index: 1;
 }
 
 .venue-map {
+  position: relative;
+  z-index: 1;
   width: 100%;
   min-height: 420px;
   border: 1px solid var(--line);
@@ -837,6 +840,13 @@ h3,
 .leaflet-container {
   font-family: "Urbanist", sans-serif;
   background: #0b1d27;
+  z-index: 1;
+}
+
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 10;
 }
 
 .map-marker {
