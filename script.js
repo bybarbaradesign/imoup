@@ -101,14 +101,16 @@ const validatePhone = () => {
   let isValid = false;
 
   if (phoneIntlInstance) {
-    if (rawValue.startsWith("+")) {
-      isValid = phoneIntlInstance.isValidNumber();
+    const selectedData = phoneIntlInstance.getSelectedCountryData();
+    const fullNumber = rawValue.startsWith("+")
+      ? rawValue
+      : `+${selectedData.dialCode}${digitsOnly}`;
+
+    if (selectedData.iso2 === "pt") {
+      isValid = /^[29]\d{8}$/.test(digitsOnly) || /^9\d{8}$/.test(digitsOnly);
     } else {
-      const selectedData = phoneIntlInstance.getSelectedCountryData();
-      const dialCode = selectedData?.dialCode ? `+${selectedData.dialCode}` : "";
-      const fullNumber = `${dialCode}${digitsOnly}`;
       isValid =
-        digitsOnly.length >= 9 &&
+        digitsOnly.length >= 6 &&
         digitsOnly.length <= 12 &&
         typeof window.intlTelInputUtils !== "undefined" &&
         window.intlTelInputUtils.isValidNumber(fullNumber, selectedData.iso2);
