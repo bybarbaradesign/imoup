@@ -1158,7 +1158,7 @@ h3,
   overflow-y: auto;
   background: rgba(2, 10, 16, 0.72);
   backdrop-filter: blur(12px);
-  z-index: 3000;
+  z-index: 99999;
 }
 
 .modal-overlay.open {

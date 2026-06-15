@@ -102,24 +102,22 @@ const validatePhone = () => {
 
   if (phoneIntlInstance) {
     const selectedData = phoneIntlInstance.getSelectedCountryData();
-    if (digitsOnly.length === 9 && digitsOnly.startsWith("9")) {
-      phoneIntlInstance.setCountry("pt");
-    }
-    const fullNumber = rawValue.startsWith("+")
-      ? rawValue
-      : `+${selectedData.dialCode}${digitsOnly}`;
+    const countryCode = selectedData.iso2 || "pt";
 
-    if (selectedData.iso2 === "pt" || (digitsOnly.length === 9 && digitsOnly.startsWith("9"))) {
-      isValid = /^9\d{8}$/.test(digitsOnly) || /^2\d{8}$/.test(digitsOnly);
+    if (countryCode === "pt" || (digitsOnly.length === 9 && (digitsOnly.startsWith("9") || digitsOnly.startsWith("2")))) {
+      isValid = /^[29]\d{8}$/.test(digitsOnly);
     } else {
+      const fullNumber = rawValue.startsWith("+")
+        ? rawValue
+        : `+${selectedData.dialCode}${digitsOnly}`;
       isValid =
         digitsOnly.length >= 6 &&
-        digitsOnly.length <= 12 &&
+        digitsOnly.length <= 15 &&
         typeof window.intlTelInputUtils !== "undefined" &&
-        window.intlTelInputUtils.isValidNumber(fullNumber, selectedData.iso2);
+        window.intlTelInputUtils.isValidNumber(fullNumber, countryCode);
     }
   } else {
-    isValid = digitsOnly.length >= 9 && digitsOnly.length <= 12;
+    isValid = /^[+]?(\d{6,15})$/.test(digitsOnly) || /^[29]\d{8}$/.test(digitsOnly);
   }
 
   const message = !hasValue || !isValid ? "Erro: introduz um número de contacto válido." : "";
@@ -173,8 +171,11 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
     button.addEventListener("click", (event) => {
       event.preventDefault();
       const ticketType = button.dataset.ticket || "Bilhete";
-      targetTicketUrl = button.dataset.targetUrl || "https://imoup.pt/#bilhetes";
+      const ticketUrl = button.dataset.targetUrl || "https://imoup.pt/#bilhetes";
+      const productId = button.dataset.productId || "";
+      targetTicketUrl = ticketUrl;
       ticketTypeInput.value = ticketType;
+      ticketTypeInput.dataset.productId = productId;
       selectedTicketName.textContent = ticketType;
       ticketModal.classList.add("open");
       ticketModal.setAttribute("aria-hidden", "false");
@@ -193,24 +194,44 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
 
     const isPhoneValid = validatePhone();
     const isEmailValid = validateEmailField();
+    const consentCheckbox = ticketForm.querySelector('input[name="consent"]');
+
+    if (!consentCheckbox || !consentCheckbox.checked) {
+      alert("É obrigatório aceitar os Termos e Condições e a Política de Privacidade para continuar.");
+      consentCheckbox?.focus();
+      return;
+    }
 
     if (!ticketForm.reportValidity() || !isPhoneValid || !isEmailValid) return;
 
     const formData = new FormData(ticketForm);
-    sessionStorage.setItem(
-      "imoupTicketLead",
-      JSON.stringify({
-        name: formData.get("name"),
-        email: formData.get("email"),
-        phoneCountry: phoneIntlInstance ? `+${phoneIntlInstance.getSelectedCountryData().dialCode}` : "",
-        phone: phoneInput?.value || "",
-        consent: formData.get("consent") === "on",
-        ticketType: formData.get("ticketType"),
-        submittedAt: new Date().toISOString(),
-      })
-    );
+    const productId = ticketTypeInput.dataset.productId || "";
+    const ticketUrl = targetTicketUrl || "https://imoup.pt/#bilhetes";
 
-    window.open(targetTicketUrl, "_blank", "noopener,noreferrer");
+    const leadData = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phoneCountry: phoneIntlInstance ? `+${phoneIntlInstance.getSelectedCountryData().dialCode}` : "",
+      phone: phoneInput?.value || "",
+      consent: formData.get("consent") === "on",
+      ticketType: formData.get("ticketType"),
+      productId: productId,
+      ticketUrl: ticketUrl,
+      submittedAt: new Date().toISOString(),
+    };
+
+    sessionStorage.setItem("imoupTicketLead", JSON.stringify(leadData));
+    localStorage.setItem("imoupTicketLead", JSON.stringify(leadData));
+
+    // Se tivermos um productId WooCommerce, vamos diretamente para checkout
+    if (productId) {
+      const checkoutUrl = `https://imoup.pt/checkout/?add-to-cart=${encodeURIComponent(productId)}`;
+      window.location.href = checkoutUrl;
+    } else {
+      // Caso contrário, abre a página do produto em nova aba
+      window.open(ticketUrl, "_blank", "noopener,noreferrer");
+    }
+
     closeTicketModal();
     ticketForm.reset();
     setStatusState(phoneStatus, "");
