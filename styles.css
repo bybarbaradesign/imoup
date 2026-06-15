@@ -1181,19 +1181,18 @@ h3,
 }
 
 .ticket-modal h2 {
-  display: grid;
-  gap: 4px;
+  display: block;
   width: 100%;
-  max-width: 14ch;
-  line-height: 1.08;
+  max-width: none;
+  line-height: 1.15;
 }
 
 .ticket-modal-heading {
   margin: 0 0 10px;
-  text-align: justify;
-  font-size: clamp(1.15rem, 1.85vw, 1.55rem);
+  text-align: left;
+  font-size: clamp(1.2rem, 2.2vw, 1.65rem);
   max-width: none;
-  line-height: 1.45;
+  line-height: 1.35;
 }
 
 .modal-close {
