@@ -125,7 +125,7 @@ const validatePhone = () => {
     isValid = /^(?:[+]?\d{6,15}|[29]\d{8})$/.test(digitsOnly);
   }
 
-  const message = !hasValue || !isValid ? "Erro: introduz um número de contacto válido." : "";
+  const message = !hasValue || !isValid ? "Erro: introduz um nÃºmero de contacto vÃ¡lido." : "";
 
   phoneInput.setCustomValidity(message);
   if (phoneError) phoneError.textContent = message;
@@ -139,7 +139,7 @@ const validateEmailField = () => {
 
   const value = emailInput.value.trim();
   const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
-  const message = value.length === 0 || !isValid ? "Erro: introduz um endereço de email válido." : "";
+  const message = value.length === 0 || !isValid ? "Erro: introduz um endereÃ§o de email vÃ¡lido." : "";
 
   emailInput.setCustomValidity(message);
   if (emailError) emailError.textContent = message;
@@ -157,11 +157,11 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
       initialCountry: localeCountry,
       preferredCountries: ["pt", "es", "fr", "gb", "br", "us"],
       i18n: {
-        searchPlaceholder: "Pesquisar país",
-        noCountrySelected: "Nenhum país selecionado",
+        searchPlaceholder: "Pesquisar paÃ­s",
+        noCountrySelected: "Nenhum paÃ­s selecionado",
         zeroSearchResults: "Sem resultados",
         oneSearchResult: "1 resultado",
-        multipleSearchResults: "Vários resultados",
+        multipleSearchResults: "VÃ¡rios resultados",
       },
       countrySearch: false,
       separateDialCode: true,
@@ -202,7 +202,7 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
     const consentCheckbox = ticketForm.querySelector('input[name="consent"]');
 
     if (!consentCheckbox || !consentCheckbox.checked) {
-      alert("É obrigatório aceitar os Termos e Condições e a Política de Privacidade para continuar.");
+      alert("Ã‰ obrigatÃ³rio aceitar os Termos e CondiÃ§Ãµes e a PolÃ­tica de Privacidade para continuar.");
       consentCheckbox?.focus();
       return;
     }
@@ -233,7 +233,7 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
       const checkoutUrl = `https://imoup.pt/checkout/?add-to-cart=${encodeURIComponent(productId)}`;
       window.location.href = checkoutUrl;
     } else {
-      // Caso contrário, abre a página do produto em nova aba
+      // Caso contrÃ¡rio, abre a pÃ¡gina do produto em nova aba
       window.open(ticketUrl, "_blank", "noopener,noreferrer");
     }
 
@@ -276,7 +276,7 @@ if (venueMapElement && typeof L !== "undefined") {
       markerClass: "map-marker map-marker--event",
     },
     {
-      name: "Meliá Ria",
+      name: "MeliÃ¡ Ria",
       coordinates: [40.6386, -8.6452],
       url: "https://www.google.com/maps/search/?api=1&query=40.6386,-8.6452",
       markerClass: "map-marker map-marker--melia",
