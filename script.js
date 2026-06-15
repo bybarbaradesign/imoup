@@ -131,6 +131,7 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
           oneSearchResult: "1 resultado",
           multipleSearchResults: "Vários resultados",
         },
+      countrySearch: false,
       separateDialCode: true,
       strictMode: true,
       formatOnDisplay: true,
