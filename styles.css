@@ -462,6 +462,14 @@ h3,
   display: grid;
 }
 
+.hero-details strong span:first-child {
+  font-weight: 400;
+}
+
+.hero-details strong span:last-child {
+  font-weight: 700;
+}
+
 .stats-band,
 .speaker-grid,
 .ticket-grid,
