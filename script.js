@@ -228,9 +228,12 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
     sessionStorage.setItem("imoupTicketLead", JSON.stringify(leadData));
     localStorage.setItem("imoupTicketLead", JSON.stringify(leadData));
 
-    // Redireciona para a página do produto no WooCommerce
-    if (ticketUrl) {
-      window.open(ticketUrl, "_blank");
+    // Redireciona para o checkout WooCommerce com o bilhete no carrinho
+    if (productId) {
+      const checkoutUrl = `https://imoup.pt/checkout/?add-to-cart=${encodeURIComponent(productId)}`;
+      window.top.location.href = checkoutUrl;
+    } else if (ticketUrl) {
+      window.open(ticketUrl, "_blank", "noopener,noreferrer");
     }
 
     closeTicketModal();
