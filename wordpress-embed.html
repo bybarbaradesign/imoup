@@ -1,0 +1,82 @@
+﻿<style>
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #061a24;
+  }
+
+  /* Remove margens/padding do Elementor */
+  .elementor-widget-html,
+  .elementor-widget-container,
+  .elementor-column,
+  .elementor-section,
+  .elementor-container,
+  .elementor {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Esconde o header/título do WordPress nesta página */
+  .site-header,
+  .elementor-location-header,
+  .entry-title,
+  .page-title {
+    display: none !important;
+  }
+
+  /* Container do iframe */
+  .imoup-embed {
+    position: relative;
+    width: 100%;
+    background: #061a24;
+    overflow: hidden;
+  }
+
+  .imoup-frame {
+    display: block;
+    width: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    background: #061a24;
+    min-height: 100vh;
+  }
+
+  /* Remove scroll horizontal */
+  .imoup-frame::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+</style>
+
+<div class="imoup-embed">
+  <iframe
+    id="imoup-frame"
+    class="imoup-frame"
+    src="https://bybarbaradesign.github.io/imoup/"
+    title="IMO UP Connect Summit"
+    loading="eager"
+    referrerpolicy="no-referrer-when-downgrade"
+    scrolling="yes"
+    allow="fullscreen"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups">
+  </iframe>
+</div>
+
+<script>
+  // Ajusta altura do iframe ao conteúdo e redireciona links para imoup.pt
+  ;(function() {
+    var iframe = document.getElementById('imoup-frame');
+    if (!iframe) return;
+
+    // Comunicação com o iframe para ajustar scroll
+    window.addEventListener('message', function(e) {
+      if (e.origin !== 'https://bybarbaradesign.github.io') return;
+      if (e.data && e.data.type === 'scrollTo') {
+        window.scrollTo({ top: e.data.top, behavior: 'smooth' });
+      }
+    });
+  })();
+</script>
