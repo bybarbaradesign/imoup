@@ -102,12 +102,15 @@ const validatePhone = () => {
 
   if (phoneIntlInstance) {
     const selectedData = phoneIntlInstance.getSelectedCountryData();
+    if (digitsOnly.length === 9 && digitsOnly.startsWith("9")) {
+      phoneIntlInstance.setCountry("pt");
+    }
     const fullNumber = rawValue.startsWith("+")
       ? rawValue
       : `+${selectedData.dialCode}${digitsOnly}`;
 
-    if (selectedData.iso2 === "pt") {
-      isValid = /^[29]\d{8}$/.test(digitsOnly) || /^9\d{8}$/.test(digitsOnly);
+    if (selectedData.iso2 === "pt" || (digitsOnly.length === 9 && digitsOnly.startsWith("9"))) {
+      isValid = /^9\d{8}$/.test(digitsOnly) || /^2\d{8}$/.test(digitsOnly);
     } else {
       isValid =
         digitsOnly.length >= 6 &&
