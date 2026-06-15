@@ -124,13 +124,13 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
     phoneIntlInstance = window.intlTelInput(phoneInput, {
       initialCountry: "pt",
       preferredCountries: ["pt", "es", "fr", "gb", "br", "us"],
-      i18n: {
-        searchPlaceholder: "Pesquisar país",
-        noCountrySelected: "Nenhum país selecionado",
-        zeroSearchResults: "Sem resultados",
-        oneSearchResult: "1 resultado",
-        multipleSearchResults: "Vários resultados",
-      },
+        i18n: {
+          searchPlaceholder: "Pesquisar país",
+          noCountrySelected: "Nenhum país selecionado",
+          zeroSearchResults: "Sem resultados",
+          oneSearchResult: "1 resultado",
+          multipleSearchResults: "Vários resultados",
+        },
       separateDialCode: true,
       strictMode: true,
       formatOnDisplay: true,

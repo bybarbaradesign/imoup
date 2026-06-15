@@ -1591,19 +1591,21 @@ h3,
   }
 
   .ticket-grid-three {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(280px, 86%);
+    display: flex;
+    flex-wrap: nowrap;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 16px;
     padding-bottom: 8px;
     justify-content: start;
+    align-items: stretch;
   }
 
   .ticket-grid-three .ticket-card {
     scroll-snap-align: start;
-    min-width: 0;
+    flex: 0 0 86%;
+    min-width: 280px;
+    max-width: 340px;
   }
 
   .ticket-grid-three::-webkit-scrollbar {
