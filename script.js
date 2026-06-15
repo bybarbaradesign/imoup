@@ -230,7 +230,7 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
 
     // Redireciona para o checkout WooCommerce com o bilhete no carrinho
     if (productId) {
-      const checkoutUrl = `https://imoup.pt/checkout/?add-to-cart=${encodeURIComponent(productId)}`;
+      const checkoutUrl = `https://imoup.pt/finalizar-compra/?add-to-cart=${encodeURIComponent(productId)}`;
       // Tenta redirecionar o parent primeiro (iframe context), senão redireciona a janela atual
       if (window.parent && window.parent !== window) {
         window.parent.postMessage({ type: 'imoup_redirect', url: checkoutUrl }, '*');
