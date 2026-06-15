@@ -94,8 +94,29 @@ const setStatusState = (element, state) => {
 const validatePhone = () => {
   if (!phoneInput) return true;
 
-  const hasValue = phoneInput.value.trim().length > 0;
-  const isValid = phoneIntlInstance ? phoneIntlInstance.isValidNumber() : false;
+  const rawValue = phoneInput.value.trim();
+  const digitsOnly = rawValue.replace(/\D/g, "");
+  const hasValue = rawValue.length > 0;
+
+  let isValid = false;
+
+  if (phoneIntlInstance) {
+    if (rawValue.startsWith("+")) {
+      isValid = phoneIntlInstance.isValidNumber();
+    } else {
+      const selectedData = phoneIntlInstance.getSelectedCountryData();
+      const dialCode = selectedData?.dialCode ? `+${selectedData.dialCode}` : "";
+      const fullNumber = `${dialCode}${digitsOnly}`;
+      isValid =
+        digitsOnly.length >= 9 &&
+        digitsOnly.length <= 12 &&
+        typeof window.intlTelInputUtils !== "undefined" &&
+        window.intlTelInputUtils.isValidNumber(fullNumber, selectedData.iso2);
+    }
+  } else {
+    isValid = digitsOnly.length >= 9 && digitsOnly.length <= 12;
+  }
+
   const message = !hasValue || !isValid ? "Erro: introduz um número de contacto válido." : "";
 
   phoneInput.setCustomValidity(message);
@@ -124,13 +145,13 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
     phoneIntlInstance = window.intlTelInput(phoneInput, {
       initialCountry: "pt",
       preferredCountries: ["pt", "es", "fr", "gb", "br", "us"],
-        i18n: {
-          searchPlaceholder: "Pesquisar país",
-          noCountrySelected: "Nenhum país selecionado",
-          zeroSearchResults: "Sem resultados",
-          oneSearchResult: "1 resultado",
-          multipleSearchResults: "Vários resultados",
-        },
+      i18n: {
+        searchPlaceholder: "Pesquisar país",
+        noCountrySelected: "Nenhum país selecionado",
+        zeroSearchResults: "Sem resultados",
+        oneSearchResult: "1 resultado",
+        multipleSearchResults: "Vários resultados",
+      },
       countrySearch: false,
       separateDialCode: true,
       strictMode: true,
