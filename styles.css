@@ -1187,10 +1187,10 @@ h3,
 
 .ticket-modal-heading {
   margin: 0 0 10px;
-  text-align: left;
-  font-size: clamp(1rem, 1.55vw, 1.3rem);
+  text-align: justify;
+  font-size: clamp(1.15rem, 1.85vw, 1.55rem);
   max-width: none;
-  line-height: 1.3;
+  line-height: 1.45;
 }
 
 .modal-close {
@@ -1312,9 +1312,13 @@ h3,
   min-height: 42px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
+  background: linear-gradient(145deg, rgba(11, 55, 88, 0.98), rgba(6, 26, 36, 0.98));
   color: var(--white);
   padding: 0 12px;
+}
+
+.iti__search-input::placeholder {
+  color: rgba(255, 255, 255, 0.68);
 }
 
 .iti__selected-dial-code {
