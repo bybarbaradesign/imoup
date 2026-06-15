@@ -105,7 +105,12 @@ const validatePhone = () => {
     const countryCode = selectedData.iso2 || "pt";
 
     if (countryCode === "pt" || (digitsOnly.length === 9 && (digitsOnly.startsWith("9") || digitsOnly.startsWith("2")))) {
-      isValid = /^[29]\d{8}$/.test(digitsOnly);
+      // Handle +351 prefix if present
+      let localDigits = digitsOnly;
+      if (digitsOnly.length === 12 && digitsOnly.startsWith("351")) {
+        localDigits = digitsOnly.slice(3);
+      }
+      isValid = /^[29]\d{8}$/.test(localDigits);
     } else {
       const fullNumber = rawValue.startsWith("+")
         ? rawValue
@@ -117,7 +122,7 @@ const validatePhone = () => {
         window.intlTelInputUtils.isValidNumber(fullNumber, countryCode);
     }
   } else {
-    isValid = /^[+]?(\d{6,15})$/.test(digitsOnly) || /^[29]\d{8}$/.test(digitsOnly);
+    isValid = /^(?:[+]?\d{6,15}|[29]\d{8})$/.test(digitsOnly);
   }
 
   const message = !hasValue || !isValid ? "Erro: introduz um número de contacto válido." : "";
