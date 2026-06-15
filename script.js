@@ -14,8 +14,10 @@ const phoneInput = document.querySelector("#phone-input");
 const phoneStatus = document.querySelector("#phone-status");
 const phoneError = document.querySelector("#phone-error");
 const emailInput = ticketForm?.querySelector('input[name="email"]');
+const emailStatus = document.querySelector("#email-status");
 const emailError = document.querySelector("#email-error");
 let targetTicketUrl = "https://imoup.pt/#bilhetes";
+let phoneIntlInstance;
 
 if (menuToggle && siteNav) {
   menuToggle.addEventListener("click", () => {
@@ -91,26 +93,45 @@ const setStatusState = (element, state) => {
 
 const validatePhone = () => {
   if (!phoneInput) return true;
-  const digits = phoneInput.value.replace(/\D/g, "");
-  const isValid = digits.length >= 9 && digits.length <= 12;
-  const message = isValid ? "" : "Erro: introduz um número de contacto válido.";
+
+  const hasValue = phoneInput.value.trim().length > 0;
+  const isValid = phoneIntlInstance ? phoneIntlInstance.isValidNumber() : false;
+  const message = !hasValue || !isValid ? "Erro: introduz um número de contacto válido." : "";
+
   phoneInput.setCustomValidity(message);
   if (phoneError) phoneError.textContent = message;
-  setStatusState(phoneStatus, digits.length === 0 ? "" : isValid ? "is-valid" : "is-invalid");
+  setStatusState(phoneStatus, !hasValue ? "" : isValid ? "is-valid" : "is-invalid");
+
   return isValid;
 };
 
 const validateEmailField = () => {
   if (!emailInput) return true;
+
   const value = emailInput.value.trim();
   const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
-  const message = isValid ? "" : "Erro: introduz um endereço de email válido.";
+  const message = value.length === 0 || !isValid ? "Erro: introduz um endereço de email válido." : "";
+
   emailInput.setCustomValidity(message);
   if (emailError) emailError.textContent = message;
+  setStatusState(emailStatus, value.length === 0 ? "" : isValid ? "is-valid" : "is-invalid");
+
   return isValid;
 };
 
 if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && selectedTicketName) {
+  if (phoneInput && typeof window.intlTelInput === "function") {
+    phoneIntlInstance = window.intlTelInput(phoneInput, {
+      initialCountry: "pt",
+      preferredCountries: ["pt", "es", "fr", "gb", "br", "us"],
+      separateDialCode: true,
+      strictMode: true,
+      formatOnDisplay: true,
+      nationalMode: false,
+      loadUtils: () => import("https://cdn.jsdelivr.net/npm/intl-tel-input@24.6.1/build/js/utils.js"),
+    });
+  }
+
   ticketButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
@@ -132,8 +153,10 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
 
   ticketForm.addEventListener("submit", (event) => {
     event.preventDefault();
+
     const isPhoneValid = validatePhone();
     const isEmailValid = validateEmailField();
+
     if (!ticketForm.reportValidity() || !isPhoneValid || !isEmailValid) return;
 
     const formData = new FormData(ticketForm);
@@ -142,8 +165,8 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
       JSON.stringify({
         name: formData.get("name"),
         email: formData.get("email"),
-        phoneCountry: formData.get("phoneCountry"),
-        phone: formData.get("phone"),
+        phoneCountry: phoneIntlInstance ? `+${phoneIntlInstance.getSelectedCountryData().dialCode}` : "",
+        phone: phoneInput?.value || "",
         consent: formData.get("consent") === "on",
         ticketType: formData.get("ticketType"),
         submittedAt: new Date().toISOString(),
@@ -154,19 +177,21 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
     closeTicketModal();
     ticketForm.reset();
     setStatusState(phoneStatus, "");
+    setStatusState(emailStatus, "");
     if (phoneError) phoneError.textContent = "";
     if (emailError) emailError.textContent = "";
+    if (phoneIntlInstance) phoneIntlInstance.setCountry("pt");
   });
 
   if (phoneInput) {
-    phoneInput.addEventListener("input", () => {
-      phoneInput.value = phoneInput.value.replace(/[^\d\s()+-]/g, "");
-      validatePhone();
-    });
+    phoneInput.addEventListener("input", validatePhone);
+    phoneInput.addEventListener("blur", validatePhone);
+    phoneInput.addEventListener("countrychange", validatePhone);
   }
 
   if (emailInput) {
     emailInput.addEventListener("input", validateEmailField);
+    emailInput.addEventListener("blur", validateEmailField);
   }
 }
 

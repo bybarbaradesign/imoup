@@ -46,7 +46,7 @@ a {
 
 .site-header {
   position: sticky;
-  top: 16px;
+  top: 0;
   z-index: 1000;
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -55,7 +55,7 @@ a {
   padding: 14px 20px;
   margin-bottom: 32px;
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 0 0 24px 24px;
   background: rgba(6, 26, 36, 0.82);
   backdrop-filter: blur(18px);
   box-shadow: var(--shadow);
@@ -386,7 +386,7 @@ h3,
 
 .hero-card {
   position: relative;
-  width: min(100%, 320px);
+  width: min(100%, 380px);
   padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 32px;
@@ -1244,12 +1244,6 @@ h3,
   background: var(--red);
 }
 
-.phone-row {
-  display: grid;
-  grid-template-columns: 132px 1fr;
-  gap: 10px;
-}
-
 .ticket-form input[type="text"],
 .ticket-form input[type="email"],
 .ticket-form input[type="tel"],
@@ -1278,6 +1272,51 @@ h3,
 .ticket-form select option {
   color: var(--white);
   background: #0d2430;
+}
+
+.iti {
+  width: 100%;
+}
+
+.iti--allow-dropdown input,
+.iti--separate-dial-code input {
+  padding-left: 92px !important;
+}
+
+.iti__country-container {
+  left: 8px;
+}
+
+.iti__selected-country {
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(11, 55, 88, 0.98), rgba(6, 26, 36, 0.98));
+}
+
+.iti__country-list {
+  max-height: 240px;
+  background: #0d2430;
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow);
+}
+
+.iti__country {
+  color: var(--white);
+}
+
+.iti__country.iti__highlight {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.iti__search-input {
+  width: calc(100% - 20px);
+  margin: 10px;
+  min-height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--white);
+  padding: 0 12px;
 }
 
 .field-error {
@@ -1539,14 +1578,34 @@ h3,
     gap: 12px;
   }
 
+  .ticket-grid-three {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 8px;
+  }
+
+  .ticket-grid-three .ticket-card {
+    scroll-snap-align: start;
+    min-width: 0;
+  }
+
+  .ticket-grid-three::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .ticket-grid-three::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+  }
+
   .hero-actions,
   .footer-contact-list,
   .modal-actions {
     flex-direction: column;
-  }
-
-  .phone-row {
-    grid-template-columns: 1fr;
   }
 
   .consent-note {
