@@ -386,7 +386,7 @@ h3,
 
 .hero-card {
   position: relative;
-  width: min(100%, 260px);
+  width: min(100%, 320px);
   padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 32px;
@@ -457,7 +457,8 @@ h3,
 }
 
 .hero-details strong {
-  font-size: 1.15rem;
+  font-size: 1rem;
+  line-height: 1.4;
 }
 
 .stats-band,
@@ -751,7 +752,7 @@ h3,
 
 .ticket-card-double .ticket-price,
 .ticket-card-double h3 {
-  color: var(--red);
+  color: var(--green);
 }
 
 .ticket-card-vip .ticket-price,
@@ -1379,7 +1380,7 @@ h3,
   }
 
   .hero-card {
-    width: min(100%, 320px);
+    width: min(100%, 340px);
   }
 
   .ticket-card,
@@ -1477,6 +1478,10 @@ h3,
   .ticket-badge {
     width: 100%;
     text-align: center;
+  }
+
+  .section-heading h2 {
+    text-align: left;
   }
 
   .stats-band article,
