@@ -1617,6 +1617,33 @@ h3,
     border-radius: 999px;
   }
 
+  .speaker-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 8px;
+    justify-content: start;
+    align-items: stretch;
+  }
+
+  .speaker-grid .speaker-card {
+    scroll-snap-align: start;
+    flex: 0 0 86%;
+    min-width: 280px;
+    max-width: 340px;
+  }
+
+  .speaker-grid::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .speaker-grid::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+  }
+
   .hero-actions,
   .footer-contact-list,
   .modal-actions {
