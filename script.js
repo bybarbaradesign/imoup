@@ -142,8 +142,11 @@ const validateEmailField = () => {
 
 if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && selectedTicketName) {
   if (phoneInput && typeof window.intlTelInput === "function") {
+    const browserLocale = navigator.language?.toLowerCase() || "pt-pt";
+    const localeCountry = browserLocale.split("-")[1] || "pt";
+
     phoneIntlInstance = window.intlTelInput(phoneInput, {
-      initialCountry: "pt",
+      initialCountry: localeCountry,
       preferredCountries: ["pt", "es", "fr", "gb", "br", "us"],
       i18n: {
         searchPlaceholder: "Pesquisar país",
