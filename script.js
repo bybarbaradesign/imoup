@@ -228,10 +228,10 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
     sessionStorage.setItem("imoupTicketLead", JSON.stringify(leadData));
     localStorage.setItem("imoupTicketLead", JSON.stringify(leadData));
 
-    // Se tivermos um productId WooCommerce, vamos diretamente para checkout
+    // Se tivermos um productId WooCommerce, abre a pagina com add-to-cart numa nova aba
     if (productId) {
-      const checkoutUrl = `https://imoup.pt/checkout/?add-to-cart=${encodeURIComponent(productId)}`;
-      window.location.href = checkoutUrl;
+      const addToCartUrl = `https://imoup.pt/?add-to-cart=${encodeURIComponent(productId)}`;
+      window.open(addToCartUrl, "_blank", "noopener,noreferrer");
     } else {
       // Caso contrÃ¡rio, abre a pÃ¡gina do produto em nova aba
       window.open(ticketUrl, "_blank", "noopener,noreferrer");
