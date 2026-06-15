@@ -11,6 +11,10 @@ const modalClose = document.querySelector(".modal-close");
 const modalCancel = document.querySelector(".modal-cancel");
 const venueMapElement = document.querySelector("#venue-map");
 const phoneInput = document.querySelector("#phone-input");
+const phoneStatus = document.querySelector("#phone-status");
+const phoneError = document.querySelector("#phone-error");
+const emailInput = ticketForm?.querySelector('input[name="email"]');
+const emailError = document.querySelector("#email-error");
 let targetTicketUrl = "https://imoup.pt/#bilhetes";
 
 if (menuToggle && siteNav) {
@@ -79,20 +83,30 @@ const closeTicketModal = () => {
   ticketModal.setAttribute("aria-hidden", "true");
 };
 
+const setStatusState = (element, state) => {
+  if (!element) return;
+  element.classList.remove("is-valid", "is-invalid");
+  if (state) element.classList.add(state);
+};
+
 const validatePhone = () => {
   if (!phoneInput) return true;
   const digits = phoneInput.value.replace(/\D/g, "");
   const isValid = digits.length >= 9 && digits.length <= 12;
-  phoneInput.setCustomValidity(isValid ? "" : "Erro: introduz um número válido.");
+  const message = isValid ? "" : "Erro: introduz um número de contacto válido.";
+  phoneInput.setCustomValidity(message);
+  if (phoneError) phoneError.textContent = message;
+  setStatusState(phoneStatus, digits.length === 0 ? "" : isValid ? "is-valid" : "is-invalid");
   return isValid;
 };
 
 const validateEmailField = () => {
-  const emailInput = ticketForm?.querySelector('input[name="email"]');
   if (!emailInput) return true;
   const value = emailInput.value.trim();
   const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
-  emailInput.setCustomValidity(isValid ? "" : "Erro: introduz um email válido.");
+  const message = isValid ? "" : "Erro: introduz um endereço de email válido.";
+  emailInput.setCustomValidity(message);
+  if (emailError) emailError.textContent = message;
   return isValid;
 };
 
@@ -118,9 +132,9 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
 
   ticketForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    validatePhone();
-    validateEmailField();
-    if (!ticketForm.reportValidity()) return;
+    const isPhoneValid = validatePhone();
+    const isEmailValid = validateEmailField();
+    if (!ticketForm.reportValidity() || !isPhoneValid || !isEmailValid) return;
 
     const formData = new FormData(ticketForm);
     sessionStorage.setItem(
@@ -139,6 +153,9 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
     window.open(targetTicketUrl, "_blank", "noopener,noreferrer");
     closeTicketModal();
     ticketForm.reset();
+    setStatusState(phoneStatus, "");
+    if (phoneError) phoneError.textContent = "";
+    if (emailError) emailError.textContent = "";
   });
 
   if (phoneInput) {
@@ -148,7 +165,6 @@ if (ticketButtons.length && ticketModal && ticketForm && ticketTypeInput && sele
     });
   }
 
-  const emailInput = ticketForm.querySelector('input[name="email"]');
   if (emailInput) {
     emailInput.addEventListener("input", validateEmailField);
   }
