@@ -71,11 +71,14 @@
     var iframe = document.getElementById('imoup-frame');
     if (!iframe) return;
 
-    // Comunicação com o iframe para ajustar scroll
+    // Comunicação com o iframe: redireciona a janela principal se necessário
     window.addEventListener('message', function(e) {
       if (e.origin !== 'https://bybarbaradesign.github.io') return;
       if (e.data && e.data.type === 'scrollTo') {
         window.scrollTo({ top: e.data.top, behavior: 'smooth' });
+      }
+      if (e.data && e.data.type === 'imoup_redirect' && e.data.url) {
+        window.location.href = e.data.url;
       }
     });
   })();
